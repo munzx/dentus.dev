@@ -42,5 +42,4 @@ class subscribers extends \BaseController {
 		$subscriber->delete();
 		return Response::json('Subscriber has been deleted successfully',200);
 	}
-
 }
