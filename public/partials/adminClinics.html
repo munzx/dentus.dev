@@ -1,0 +1,73 @@
+<div class="container-fluid" data-ng-controller="adminClinics">
+	<div class="row">
+		<div class="col-md-12 col-md-offset-1">
+
+			<ul class="nav nav-pills">
+				<li><a href="#/admin/subscribers">Subscribers</a></li>
+				<li><a href="#/admin/admins">Admins</a></li>
+				<li class="active"><a href="#/admin/clinics">Clinics</a></li>
+				<li><a href="#/admin/visits">Visits</a></li>
+				<li><a href="#/admin/applications">Applications</a></li>
+			</ul>
+
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1">
+			<p data-ng-show="noData" class="bg-primary">No data has been found!</p>
+			<p data-ng-show="connectError" class="bg-warning">Uknown Error has occured while trying to achieve the operation!<button type="button" ng-click="closeConnectError()" class="close" aria-hidden="true">&times;</button></p>
+
+			<div ng-show='newClinicForm'  class="bg-info" style="padding:1%;">
+				<button type="button" ng-click="closeNewClincForm()" class="close" aria-hidden="true">&times;</button>
+				<form ng-model="newClinicInfo">
+					<div class="form-group">
+						<input class="search" type="text" ng-model="newClinicInfo.name" placeholder="Name">
+						<input class="search" type="email" ng-model="newClinicInfo.email" placeholder="Email">
+						<input class="search" type="number" ng-model="newClinicInfo.phone_number" placeholder="Phone Number">
+						<select class="btn btn-primary" ng-options="option for option in cityOptions" ng-model="newClinicInfo.city"></select>
+					</div>
+					<div class="form-group">
+						<input class="search" type="text" ng-model="newClinicInfo.address" placeholder="Address">
+						<input class="search" type="text" ng-model="newClinicInfo.description" placeholder="Description">
+						<input class="search" type="password" ng-model="newClinicInfo.password" placeholder="Password">
+					</div>
+					<div class="form-group">
+						<label>Profile Image</label>
+						<input class="search" type="file" ng-model="newClinicInfo.img_link">
+						<label>Logo</label>
+						<input class="search" type="file" ng-model="newClinicInfo.pic_link">
+						<button class="btn btn-primary btn-lg" ng-click="saveClinic(newClinicInfo.id)">Save</button>
+					</div>
+					
+				</form>
+			</div>
+
+			<div data-ng-show="clinicsTable"  class="table-responsive">
+				<table class="table table-striped table-hover">
+					<thead>
+						<tr>
+							<th><span ng-click="showNewClinicForm()" class="label label-primary">New</span></th>
+							<th>Name</th>
+							<th>Phone</th>
+							<th>Email</th>
+							<th>City</th>
+							<th>Address</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr data-ng-repeat="clinic in clinics">
+							<td><span ng-click="deleteClinic($index,clinic.id)" class="glyphicon glyphicon-remove-circle"></span> <span ng-click="editClinic($index,clinic.id)" class="glyphicon glyphicon-pencil"></span></td>
+							<td>{{clinic.name}}</td>
+							<td>{{clinic.phone_number}}</td>
+							<td>{{clinic.email}}</td>
+							<td>{{clinic.city}}</td>
+							<td>{{clinic.address}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+</div>

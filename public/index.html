@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" type="text/css" href="css/css.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+	<title>Dentus</title>
+</head>
+<body data-ng-app="dentus">
+
+	<div id="wrap">
+
+		<!--header-->
+		<header class="header-wraper">
+			<!--header-top-->
+			<aside class="header-top">
+				<!--top-contener-->
+				<article class="container">
+					<div class="row">
+						<!--left-email-->
+						<figure class="col-xs-12 col-sm-5 col-md-5 top-left hidden-xs">
+							<p> 1800-555-1234 - <a href="mailto:mail@lorem.com">mail@lorem.com</a></p>
+						</figure>
+						<!--end-left-email-->
+					</div>
+				</article>
+				<!--end-top-contener-->
+			</aside>
+			<!--end-header-top-->
+
+			<!--header-menu-->
+			<aside>
+				<!-- Fixed navbar -->
+				<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+					<div class="container">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+							<a class="navbar-brand hidden-xs" href="/"><img src="images/logo.png"  alt="" class="img-responsive"></a>
+							<a class="navbar-brand hidden-sm hidden-md visible-xs xs-logo" href="index.html">DENT <span>US</span></a>
+						</div>
+
+						<div class="navbar-collapse collapse">
+
+							<!-- login -->
+							<div  ng-controller='login' >
+								<form data-ng-model="logInfo" data-ng-show="logIn" class="navbar-form navbar-left" role="login">
+									<div class="form-group">
+										<p data-ng-show="accessDenied" class="bg-warning">Wrong Email/Password combination!</p>
+										<input type="email" ng-model="logInfo.email" class="form-control search" placeholder="Email">
+										<input type="password" ng-model="logInfo.password" class="form-control search" placeholder="Password">
+									</div>
+									<button data-ng-click="doLogIn()" class="btn btn-link">SignIn</button>
+								</form>
+								<form  data-ng-show="logOut" class="navbar-form navbar-left" role="logout">
+									<button class="btn btn-link" data-ng-click="doLogOut()">LogOut</button>
+								</form>
+							</div>
+							<!-- End Login -->
+
+							<ul class="nav navbar-nav navbar-right">
+								<li><a ng-href="#/" class="active">Home</a></li>
+								<li><a ng-href="#/contactus">Contact Us</a></li>
+								<li><a ng-href="#/faq">FAQ</a></li>
+							</ul>
+						</div><!--/.nav-collapse -->
+					</div>
+				</div>
+			</aside>
+			<!--end-header-menu-->
+		</header>
+		<!--end-header-->
+		<!--body-->
+
+		<aside class="body-wraper">
+			<div ng-view></div>
+		</aside>
+
+	</div>
+
+	<!--footer-->
+	<footer class="footer-wraper">
+		<figure class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-3 col-md-3">
+					<h1>Pages</h1>
+					<p><a href="#">About us</a></p>
+					<p><a href="#">Services</a></p>
+					<p><a href="#">Our doctors</a></p>
+					<p><a href="#">Make an appointment</a></p>
+					<p><a href="#">Blog</a></p>
+					<p><a href="#">Single post</a></p>
+				</div>
+
+				<div class="col-xs-12 col-sm-3 col-md-3">
+					<h1>Features</h1>
+					<p><a href="#">404 Error Page</a></p>
+					<p><a href="#">Newsletter template</a></p>
+					<p><a href="#">Modal windows and tooltips</a></p>
+					<p><a href="#">Grid presentation</a></p>
+				</div>
+
+				<div class="col-xs-12 col-sm-3 col-md-3">
+					<form action="" method="get">
+						<h1>Newsletter</h1>
+						<div class="input-group custom-search-form">
+							<input type="text" class="form-control search" placeholder="Your Email">
+							<span class="input-group-btn">
+								<button class="btn btn-default go" type="button">
+									<span>Go</span>
+								</button>
+							</span>
+						</div><!-- /input-group -->
+						<p style="padding-top:8px;">Sign up for our newsletter to receive updates, news, and promotions. You can unsubscribe at any time.</p>
+					</form>
+				</div>
+
+				<div class="col-xs-12 col-sm-3 col-md-3">
+					<h1>DENTUS</h1>
+					<p>0-800-423-5488<br>
+
+						1-A Kresowa street<br>
+
+						City of india, state 20-212</p>
+					</div>
+				</div>
+				<div class="row copyright-part">
+					<p>Copyright © 2012 Loremipsum. All right reserved.
+						<a href="#" class="pull-right" style="display:inline-block; margin-left:10px;"><i class="fa fa-google-plus fa-2x"></i></a>
+						<a href="#" class="pull-right" style="display:inline-block; margin-left:10px;"><i class="fa fa-youtube fa-2x"></i></a>
+						<a href="#" class="pull-right" style="display:inline-block; margin-left:10px;"><i class="fa fa-twitter fa-2x"></i></a>
+						<a href="#" class="pull-right" style="display:inline-block"><i class="fa fa-facebook fa-2x"></i></a>
+					</p>
+				</div>
+			</figure>
+		</footer>
+		<!--end-footer-->
+
+
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-route.js"></script>
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+		<script src="js/ui-bootstrap-tpls-0.11.0.min.js"></script>
+		<script src="js/app.js"></script>
+		<script src="js/js.js"></script>
+
+
+	</body>
+	</html>

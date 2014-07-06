@@ -1,0 +1,47 @@
+<div class="container-fluid" data-ng-controller="adminVisits">
+	<div class="row">
+		<div class="col-md-12 col-md-offset-1">
+
+			<ul class="nav nav-pills">
+				<li><a href="#/admin/subscribers">Subscribers</a></li>
+				<li><a href="#/admin/admins">Admins</a></li>
+				<li><a href="#/admin/clinics">Clinics</a></li>
+				<li class="active"><a href="#/admin/visits">Visits</a></li>
+				<li><a href="#/admin/applications">Applications</a></li>
+			</ul>
+
+		</div>
+	</div>
+
+		<div class="col-md-10 col-md-offset-1">
+			<p data-ng-show="noData" class="bg-primary">No data has been found!</p>
+			<p data-ng-show="connectError" class="bg-warning">Uknown Error has occured while trying to achieve the operation!<button type="button" ng-click="closeConnectError()" class="close" aria-hidden="true">&times;</button></p>
+
+			<div data-ng-show="visitsTable"  class="table-responsive">
+				<table class="table table-striped table-hover">
+					<thead>
+						<tr>
+							<th></th>
+							<th>Clinic</th>
+							<th>Subscriber</th>
+							<th>Case</th>
+							<th>Cost</th>
+							<th>Date</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr data-ng-repeat="visit in visits">
+							<td><span ng-click="deleteVisit($index,visit.id)" class="glyphicon glyphicon-remove-circle"></span></td>
+							<td>{{visit.name}}</td>
+							<td>{{visit.first_name}} {{visit.last_name}}</td>
+							<td>{{visit.case}}</td>
+							<td>{{visit.cost}}</td>
+							<td>{{visit.created_at}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+</div>

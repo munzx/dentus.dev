@@ -1,0 +1,56 @@
+<div class="container-fluid" data-ng-controller="adminAdmins">
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1">
+
+			<ul class="nav nav-pills">
+				<li><a href="#/admin/subscribers">Subscribers</a></li>
+				<li class="active"><a href="#/admin/admins">Admins</a></li>
+				<li><a href="#/admin/clinics">Clinics</a></li>
+				<li><a href="#/admin/visits">Visits</a></li>
+				<li><a href="#/admin/applications">Applications</a></li>
+			</ul>
+
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1">
+			<p data-ng-show="noData" class="bg-primary">No data has been found!</p>
+			<p data-ng-show="connectError" class="bg-warning">Uknown Error has occured while trying to achieve the operation!<button type="button" ng-click="closeConnectError()" class="close" aria-hidden="true">&times;</button></p>
+
+			<div ng-show='newAdminfoForm'  class="bg-info" style="padding:1%;">
+				<button type="button" ng-click="closeNewAdminfoForm()" class="close" aria-hidden="true">&times;</button>
+				<form ng-model="newAdminInfo">
+					<div class="form-group">
+						<input class="search" type="text" ng-model="newAdminInfo.first_name" placeholder="First Name">
+						<input class="search" type="text" ng-model="newAdminInfo.last_name" placeholder="Last Name">
+						<input class="search" type="email" ng-model="newAdminInfo.email" placeholder="Email">
+						<input class="search" type="password" ng-model="newAdminInfo.password" placeholder="Password">
+						<button class="btn btn-primary btn-lg" ng-click="saveAdmin(newAdminInfo.id)">Save</button>
+					</div>
+					
+				</form>
+			</div>
+			
+			<div data-ng-show="adminsTable"  class="table-responsive">
+				<table class="table table-striped table-hover">
+				<thead>
+					<tr>
+						<th><span ng-click="showAdminInfoForm()" class="label label-primary">New</span></th>
+						<th>Full Name</th>
+						<th>email</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-ng-repeat="admin in admins">
+						<td><span ng-click="deleteAdmin($index,admin.id)" class="glyphicon glyphicon-remove-circle"></span> <span ng-click="editAdmin($index,admin.id)" class="glyphicon glyphicon-pencil"></span></td>
+						<td>{{admin.first_name}} {{admin.last_name}}</td>
+						<td>{{admin.email}}</td>
+					</tr>
+				</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+</div>
