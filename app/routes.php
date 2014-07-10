@@ -26,6 +26,9 @@ Route::post('subscribers/add','subscribers@add');
 Route::post('subscribers/{id}/update','subscribers@update');
 Route::get('subscribers/{id}/delete','subscribers@delete');
 Route::get('subscribers/{id}/visits','visits@users');
+//to get the subscriber info through the subscriber id in the users table
+Route::get('subscribers/myinfo','subscribers@getMyInfo');
+Route::get('subscribers/{id}','subscribers@getUserInfo');
 
 //Clinics
 Route::get('clinics','clinics@index');
@@ -43,7 +46,3 @@ Route::post('visits/add','visits@add');
 
 //Search
 Route::get('search/subscribers/{serial_number}','search@subscriberSerialNumber');
-
-
-//Applications
-Route::get('applications','applications@index');

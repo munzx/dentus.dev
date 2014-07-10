@@ -5,8 +5,9 @@
 */
 class Subscriber extends Eloquent
 {
-	protected $hidden = ['password'];
 	protected $table = 'subscribers';
+	protected $hidden = ['password'];
+	protected $guarded = ['password'];
 
 
 	public function saveSubscriber()

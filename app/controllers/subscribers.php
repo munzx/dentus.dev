@@ -24,7 +24,7 @@ class subscribers extends \BaseController {
 		$user->source_id = $subscriber->id;
 		$user->save();
 
-		return Response::json('User has been added successfully',200);
+		return Response::json([$subscriber->serial_number],200);
 	}
 
 	public function update($id)
@@ -42,4 +42,31 @@ class subscribers extends \BaseController {
 		$subscriber->delete();
 		return Response::json('Subscriber has been deleted successfully',200);
 	}
+
+	public function getMyInfo()
+	{
+		$subscriber = Subscriber::find(Auth::user()->source_id);
+		if(!$subscriber) return Response::json('Subscriber has not been found',404);
+		$subscriberAllInfo = DB::select('SELECT subscribers.*,
+			clinics.name AS clinic_name,clinics.email AS clinic_email,clinics.phone_number AS clinic_phone_number,clinics.city AS clinic_city,clinics.address AS clinic_address,clinics.description AS clinic_description,clinics.logo_link AS clinic_logo_link,clinics.pic_link AS clinic_pic_link,
+			visits.case,visits.treatment,visits.cost,visits.created_at AS visit_date
+			FROM subscribers,clinics,visits 
+			WHERE visits.subscriber_id = subscribers.id AND visits.clinic_id = clinics.id AND subscribers.id = '.Auth::user()->source_id);
+		if(!$subscriberAllInfo) return Response::json([$subscriber],200);
+		return Response::json($subscriberAllInfo,200);
+	}
+
+	public function getUserInfo($id)
+	{
+		$subscriber = DB::select('SELECT subscribers.*,
+			clinics.name AS clinic_name,clinics.email AS clinic_email,clinics.phone_number AS clinic_phone_number,clinics.city AS clinic_city,clinics.address AS clinic_address,clinics.description AS clinic_description,clinics.logo_link AS clinic_logo_link,clinics.pic_link AS clinic_pic_link,
+			visits.case,visits.treatment,visits.cost,visits.created_at AS visit_date
+			FROM subscribers,clinics,visits 
+			WHERE visits.subscriber_id = subscribers.id AND visits.clinic_id = clinics.id AND subscribers.id = '.$id);
+
+		if(!$subscriber) return Response::json('Subscriber has not been found',404);
+		return Response::json($subscriber,200);	
+	}
+
+
 }
