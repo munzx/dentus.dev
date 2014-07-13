@@ -32,6 +32,23 @@ class Clinic extends Eloquent
 		$this->description = Input::get('description');
 		$this->password = Hash::make(Input::get('password'));
 
+		if(Input::hasFile('logo_link'))
+		{
+			$prefix = date('y').date('m').date('d');
+			$fileNewName = $prefix.Input::get('email').'.'.Input::file('logo_link')->getClientOriginalExtension();
+			Input::file('logo_link')->move('uploads',$fileNewName);
+			$this->logo_link = $fileNewName;
+		}
+
+		if(Input::hasFile('pic_link'))
+		{
+			//change the prefix date order to avoid conflict in naming
+			$prefix = date('y').date('d').date('m');
+			$fileNewName = $prefix.Input::get('email').'.'.Input::file('pic_link')->getClientOriginalExtension();
+			Input::file('pic_link')->move('uploads',$fileNewName);
+			$this->pic_link = $fileNewName;
+		}
+
 		$this->save();
 
 		return true;

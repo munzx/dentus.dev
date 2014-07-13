@@ -34,7 +34,7 @@ class visits extends \BaseController
 
 	public function clinicOwnVisit()
 	{
-		$result = DB::select('SELECT subscribers.id,subscribers.first_name,subscribers.last_name,subscribers.img_link,subscribers.birthdate,visits.created_at,visits.cost,visits.case,visits.treatment FROM subscribers,visits,clinics where subscribers.active = "true" AND subscribers.id = visits.subscriber_id AND visits.clinic_id = clinics.id AND visits.clinic_id = '.Auth::user()->source_id.' ORDER BY visits.id DESC');
+		$result = DB::select('SELECT clinics.logo_link as clinic_logo,clinics.pic_link as clinic_pic,subscribers.id,subscribers.first_name,subscribers.last_name,subscribers.img_link,subscribers.birthdate,visits.created_at,visits.cost,visits.case,visits.treatment FROM subscribers,visits,clinics where subscribers.active = "true" AND subscribers.id = visits.subscriber_id AND visits.clinic_id = clinics.id AND visits.clinic_id = '.Auth::user()->source_id.' ORDER BY visits.id DESC');
 		return Response::json($result,200);
 	}
 

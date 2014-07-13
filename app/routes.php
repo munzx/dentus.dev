@@ -33,7 +33,7 @@ Route::get('subscribers/{id}','subscribers@getUserInfo');
 //Clinics
 Route::get('clinics','clinics@index');
 Route::post('clinics/add','clinics@add');
-Route::post('clinics/{id}/edit','clinics@edit');
+Route::post('clinics/{id}/update','clinics@update');
 Route::get('clinics/{id}/delete','clinics@delete');
 Route::get('clinics/{id}/visits','visits@clinics');
 //to get the clinic's visits via the clinic id in the 'users' table
@@ -46,3 +46,7 @@ Route::post('visits/add','visits@add');
 
 //Search
 Route::get('search/subscribers/{serial_number}','search@subscriberSerialNumber');
+
+
+//test posts
+Route::post('test','test@index');

@@ -159,24 +159,49 @@ dentus.controller('adminSubscribers',function ($http,$scope,$rootScope) {
 
 	$scope.saveSubscriber = function (id) {
 		if(saveStatus === 'New'){
-			$http.post('subscribers/add',$scope.newSubscriberInfo)
-			.success(function (data,success) {
-				$scope.newSubscriberInfo.serial_number = parseInt(data);
-				$scope.subscribers.unshift($scope.newSubscriberInfo);
-				$scope.newSubscriberForm = false;
-				$scope.newSubscriberInfo = {};
-			})
-			.error(function (data,error) {
-				$scope.connectError = true;
+			var formData = new FormData($('#newSubscriberForm')[0]);
+			$.ajax({
+				url: 'subscribers/add',
+				type: 'POST',
+				data: formData,
+				cache: false,
+				success : function (data) {
+					$scope.$apply(function() {
+						$scope.newSubscriberInfo.id = data['id'];
+						$scope.newSubscriberInfo.serial_number = parseInt(data['serial_number']);
+						$scope.subscribers.unshift($scope.newSubscriberInfo);
+						$scope.newSubscriberForm = false;
+						$scope.newSubscriberInfo = {};
+					});
+				},
+				error : function (XMLHttpRequest, textStatus, errorThrown) {
+					$scope.$apply(function() {
+						$scope.connectError = true;
+					});
+				},
+				contentType: false,
+				processData: false
 			});
 		} else {
-			$http.post('subscribers/'+id+'/update',$scope.newSubscriberInfo)
-			.success(function (data,success) {
-				$scope.newSubscriberForm = false;
-				$scope.newSubscriberInfo = {};
-			})
-			.error(function (data,error) {
-				$scope.connectError = true;
+			var formData = new FormData($('#newSubscriberForm')[0]);
+			$.ajax({
+				url: 'subscribers/'+id+'/update',
+				type: 'POST',
+				data: formData,
+				cache: false,
+				success : function (data) {
+					$scope.$apply(function() {
+						$scope.newSubscriberForm = false;
+						$scope.newSubscriberInfo = {};
+					});
+				},
+				error : function (XMLHttpRequest, textStatus, errorThrown) {
+					$scope.$apply(function() {
+						$scope.connectError = true;
+					});
+				},
+				contentType: false,
+				processData: false
 			});
 		}
 	}
@@ -269,6 +294,7 @@ dentus.controller('adminAdmins',function ($http,$scope) {
 		if(saveStatus === 'Add'){
 			$http.post('admins/add',$scope.newAdminInfo)
 			.success(function (data,success) {
+				$scope.newAdminInfo.id = data;
 				$scope.admins.unshift($scope.newAdminInfo);
 				$scope.newAdminfoForm = false;
 				$scope.newAdminInfo = {};
@@ -361,22 +387,48 @@ dentus.controller('adminClinics',function ($http,$scope,$rootScope) {
 
 	$scope.saveClinic = function (id) {
 		if(saveStatus === 'Add'){
-			$http.post('clinics/add',$scope.newClinicInfo)
-			.success(function (data,success) {
-				$scope.clinics.unshift($scope.newClinicInfo);
-				$scope.newClinicForm = false;
-				$scope.newClinicInfo = {};
-			})
-			.error(function () {
-				$scope.connectError = true;
+			var clinicFormData = new FormData($('#newClinicInfo')[0]);
+			$.ajax({
+				url: 'clinics/add',
+				type: 'POST',
+				data: clinicFormData,
+				cache: false,
+				success : function (data) {
+					$scope.$apply(function() {
+						$scope.newClinicInfo.id = data;
+						$scope.clinics.unshift($scope.newClinicInfo);
+						$scope.newClinicForm = false;
+						$scope.newClinicInfo = {};
+					});
+				},
+				error : function (XMLHttpRequest, textStatus, errorThrown) {
+					$scope.$apply(function() {
+						$scope.connectError = true;
+					});
+				},
+				contentType: false,
+				processData: false
 			});
 		} else {
-			$http.post('clinics/'+id+'/edit',$scope.newClinicInfo)
-			.success(function (data,success) {
-				$scope.newClinicForm = false;
-			})
-			.error(function () {
-				$scope.connectError = true;
+			var clinicFormData = new FormData($('#newClinicInfo')[0]);
+			$.ajax({
+				url: 'clinics/'+id+'/update',
+				type: 'POST',
+				data: clinicFormData,
+				cache: false,
+				success : function (data) {
+					$scope.$apply(function() {
+						$scope.newClinicForm = false;
+						$scope.newClinicInfo = {};
+					});
+				},
+				error : function (XMLHttpRequest, textStatus, errorThrown) {
+					$scope.$apply(function() {
+						$scope.connectError = true;
+					});
+				},
+				contentType: false,
+				processData: false
 			});
 		}
 	}
@@ -436,6 +488,32 @@ dentus.controller('clinics',function ($scope,$http) {
 	$scope.subscriberHistory = false;
 	$scope.serialNumberForm = true;
 
+
+
+	$http.get('clinics/myvisits')
+	.success(function (data,success) {
+		if(data.length == 0){
+			$scope.noData = true;
+		} else {
+			$scope.visits = data;
+			$scope.visitTable = true;
+		}
+	})
+	.error(function (data,error) {
+		$scope.noData = true;
+		$scope.connectError = true;
+	});
+
+
+	//if the search has been carried out then show the person image otherwise
+	//show a defualt image , here we keep the images sources
+	var imageSource = {
+		default : 'images/clint-icon.jpg',
+		subscriber : ''
+	};
+
+	$scope.showImage = imageSource.default;
+
 	$scope.closeSearchNotFoundMsg = function () {
 		$scope.SearchNotFoundMsg = false;
 		$scope.subscriberHistory = false;
@@ -450,7 +528,8 @@ dentus.controller('clinics',function ($scope,$http) {
 			$scope.subscriberHistory = true;
 			$scope.visitTable = false;
 			$scope.searchResult = data;
-			console.log(data);
+			imageSource.subscriber = 'uploads/' + data[0].img_link;
+			$scope.showImage = imageSource.subscriber;
 		})
 		.error(function (data,error) {
 			$scope.subscriberHistory = false;
@@ -461,21 +540,6 @@ dentus.controller('clinics',function ($scope,$http) {
 	$scope.closeConnectError = function () {
 		$scope.connectError = false;
 	}
-
-	$http.get('clinics/myvisits')
-	.success(function (data,success) {
-		//console.log(data);
-		if(data.length == 0){
-			$scope.noData = true;
-		} else {
-			$scope.visits = data;
-			$scope.visitTable = true;
-		}
-	})
-	.error(function (data,error) {
-		$scope.noData = true;
-		$scope.connectError = true;
-	});
 
 	$scope.saveVisit = function () {
 		$scope.newVisitInfo.subscriber_id = $scope.searchResult[0].id;
@@ -511,6 +575,7 @@ dentus.controller('clinics',function ($scope,$http) {
 		$scope.serialNumber = '';
 		$scope.subscriberHistory = false;
 		$scope.visitTable = true;
+		$scope.showImage = imageSource.default;
 	}
 
 });

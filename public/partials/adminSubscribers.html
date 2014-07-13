@@ -14,34 +14,47 @@
 
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
+			
 			<p data-ng-show="noData" class="bg-primary">No data has been found!</p>
 			<p data-ng-show="connectError" class="bg-warning">Uknown Error has occured while trying to achieve the operation!<button type="button" ng-click="closeConnectError()" class="close" aria-hidden="true">&times;</button></p>
 
 			<div ng-show='newSubscriberForm'  class="bg-info" style="padding:1%;">
 				<button type="button" ng-click="closeNewSubscriberForm()" class="close" aria-hidden="true">&times;</button>
-				<form ng-model="newSubscriberInfo">
+				<form id="newSubscriberForm" method="post" ng-model="newSubscriberInfo">
 					<div class="form-group">
-						<input class="search" type="text" ng-model="newSubscriberInfo.first_name" placeholder='First Name'>
-						<input class="search" type="text" ng-model="newSubscriberInfo.last_name" placeholder="Last Name">
-						<select class="btn btn-primary" ng-model="newSubscriberInfo.gender" ng-options="option for option in genderOptions"></select>
-						<input class="search" type="email" ng-model="newSubscriberInfo.email" placeholder="Email">
-						<select class="btn btn-primary" ng-model="newSubscriberInfo.marital_status" ng-options="option for option in martialStatusOptions"></select>
-						<input class="search" type="password" ng-model="newSubscriberInfo.password" placeholder="Password">
+						<input class="search" type="text" name="first_name" ng-model="newSubscriberInfo.first_name" placeholder='First Name'>
+						<input class="search" type="text" name="last_name" ng-model="newSubscriberInfo.last_name" placeholder="Last Name">
+						<select class="btn btn-primary" name="gender" ng-model="newSubscriberInfo.gender">
+							<option ng-repeat="option in genderOptions" value="{{option}}">{{option}}</option>
+						</select>
+						<input class="search" type="email" name="email" ng-model="newSubscriberInfo.email" placeholder="Email">
+						<select class="btn btn-primary" name="marital_status" ng-model="newSubscriberInfo.marital_status">
+							<option ng-repeat="option in martialStatusOptions" value="{{option}}">{{option}}</option>
+						</select>
+						<input class="search" type="password" name="password" ng-model="newSubscriberInfo.password" placeholder="Password">
 					</div>
 					<div class="form-group">
-						<input class="search" type="number" ng-model="newSubscriberInfo.childern" placeholder="Childern">
-						<select class="btn btn-primary" ng-model="newSubscriberInfo.nationality" size="1" style="width:15%;max-width:90%;" ng-options="option for option in nationalityOptions"></select>
-						<input class="search" type="date" ng-model="newSubscriberInfo.birthdate" placeholder="Birth Date">
-						<input class="search" type="number" ng-model="newSubscriberInfo.mobile_number" placeholder="Mobile Number">
-						<select class="btn btn-primary" ng-model="newSubscriberInfo.city" ng-options="option for option in cityOptions"></select>
-						<input class="search" type="text" ng-model="newSubscriberInfo.address" placeholder="address">
+						<input class="search" type="number" name="childern" ng-model="newSubscriberInfo.childern" placeholder="Childern">
+						<select class="btn btn-primary" name="nationality" ng-model="newSubscriberInfo.nationality" size="1" style="width:15%;max-width:90%;" >
+							<option ng-repeat="option in nationalityOptions" value="{{option}}">{{option}}</option>
+						</select>
+						<input class="search" type="date" name="birthdate" ng-model="newSubscriberInfo.birthdate" placeholder="Birth Date">
+						<input class="search" type="number" name="mobile_number" ng-model="newSubscriberInfo.mobile_number" placeholder="Mobile Number">
+						<select class="btn btn-primary" name="city" ng-model="newSubscriberInfo.city">
+							<option ng-repeat="option in cityOptions" value="{{option}}">{{option}}</option>
+						</select>
+						<input class="search" type="text" name="address" ng-model="newSubscriberInfo.address" placeholder="address">
 					</div>
 					<div class="form-group">
-					<select class="btn btn-primary" ng-model="newSubscriberInfo.work_status" ng-options="option for option in workStatusOptions"></select>
-						<input class="search" type="text" ng-model="newSubscriberInfo.company_name" placeholder="Company Name">
-						<select class="btn btn-primary" ng-model="newSubscriberInfo.company_city" ng-options="option for option in cityOptions"></select>
-						<input class="search" type="number" ng-model="newSubscriberInfo.company_phone" placeholder="Company Phone">
-						<input class="search" type="file" ng-model="newSubscriberInfo.img_link" placeholder="Profile Image">
+					<select class="btn btn-primary" name="work_status" ng-model="newSubscriberInfo.work_status">
+						<option ng-repeat="option in workStatusOptions" value="{{option}}">{{option}}</option>
+					</select>
+						<input class="search" type="text" name="company_name" ng-model="newSubscriberInfo.company_name" placeholder="Company Name">
+						<select class="btn btn-primary" name="company_city" ng-model="newSubscriberInfo.company_city">
+							<option ng-repeat="option in cityOptions" value="{{option}}">{{option}}</option>
+						</select>
+						<input class="search" type="number" name="company_phone" ng-model="newSubscriberInfo.company_phone" placeholder="Company Phone">
+						<input class="search" type="file" name="img_link" ng-model="newSubscriberInfo.img_link">
 						<button ng-click="saveSubscriber(newSubscriberInfo.id)" class="btn btn-primary btn-lg">Save</button>
 					</div>
 				</form>				
@@ -63,7 +76,7 @@
 					<tbody>
 						<tr data-ng-repeat="subscriber in subscribers">
 							<td><span ng-click="removeSubscriber($index,subscriber.id)" class="glyphicon glyphicon-remove-circle"></span> <span ng-click="editSubscriber($index,subscriber.id)" class="glyphicon glyphicon-pencil"></span></td>
-							<td><a ng-href="#">{{subscriber.first_name}} {{subscriber.last_name}}</a></td>
+							<td>{{subscriber.first_name}} {{subscriber.last_name}}</td>
 							<td>{{subscriber.serial_number}}</td>
 							<td>{{subscriber.city}}</td>
 							<td>{{subscriber.email}}</td>

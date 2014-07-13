@@ -19,23 +19,25 @@
 
 			<div ng-show='newClinicForm'  class="bg-info" style="padding:1%;">
 				<button type="button" ng-click="closeNewClincForm()" class="close" aria-hidden="true">&times;</button>
-				<form ng-model="newClinicInfo">
+				<form id="newClinicInfo" method="post" ng-model="newClinicInfo">
 					<div class="form-group">
-						<input class="search" type="text" ng-model="newClinicInfo.name" placeholder="Name">
-						<input class="search" type="email" ng-model="newClinicInfo.email" placeholder="Email">
-						<input class="search" type="number" ng-model="newClinicInfo.phone_number" placeholder="Phone Number">
-						<select class="btn btn-primary" ng-options="option for option in cityOptions" ng-model="newClinicInfo.city"></select>
+						<input class="search" type="text" name="name" ng-model="newClinicInfo.name" placeholder="Name">
+						<input class="search" type="email" name="email" ng-model="newClinicInfo.email" placeholder="Email">
+						<input class="search" type="number" name="phone_number" ng-model="newClinicInfo.phone_number" placeholder="Phone Number">
+						<select class="btn btn-primary" name="city" ng-model="newClinicInfo.city">
+							<option ng-repeat="option in cityOptions" value="{{option}}">{{option}}</option>
+						</select>
 					</div>
 					<div class="form-group">
-						<input class="search" type="text" ng-model="newClinicInfo.address" placeholder="Address">
-						<input class="search" type="text" ng-model="newClinicInfo.description" placeholder="Description">
-						<input class="search" type="password" ng-model="newClinicInfo.password" placeholder="Password">
+						<input class="search" type="text" name="address" ng-model="newClinicInfo.address" placeholder="Address">
+						<input class="search" type="text" name="description" ng-model="newClinicInfo.description" placeholder="Description">
+						<input class="search" type="password" name="password" ng-model="newClinicInfo.password" placeholder="Password">
 					</div>
 					<div class="form-group">
 						<label>Profile Image</label>
-						<input class="search" type="file" ng-model="newClinicInfo.img_link">
+						<input class="search" type="file" name="pic_link" ng-model="newClinicInfo.pic_link">
 						<label>Logo</label>
-						<input class="search" type="file" ng-model="newClinicInfo.pic_link">
+						<input class="search" type="file" name="logo_link" ng-model="newClinicInfo.logo_link">
 						<button class="btn btn-primary btn-lg" ng-click="saveClinic(newClinicInfo.id)">Save</button>
 					</div>
 					

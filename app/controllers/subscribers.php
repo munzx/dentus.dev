@@ -24,15 +24,29 @@ class subscribers extends \BaseController {
 		$user->source_id = $subscriber->id;
 		$user->save();
 
-		return Response::json([$subscriber->serial_number],200);
+		return Response::json(['serial_number'=>$subscriber->serial_number,'id'=>$subscriber->id],200);
 	}
 
 	public function update($id)
 	{
 		$subscriber = Subscriber::find($id);
 		if(!$subscriber) return Response::json('Error : Subscriber not found!',404);
-		if($subscriber->saveSubscriber()) return Response::json('Subscriber has been updated successfully',200);
-		return Response::json('Error : Could not update subscriber information',404);
+
+		//delete the old image if a new image exists
+		if(Input::hasFile('img_link'))
+		{
+			File::delete('uploads/'.$subscriber->img_link);
+		}
+
+		if(!$subscriber->saveSubscriber()) return Response::json('Error : Could not update subscriber information',500);
+
+		//update subscriber data in the users table
+		$user = User::Where('source_id','=',$id)->where('role','=','subscriber')->first();
+		$user->email = Input::get('email');
+		$user->password = Hash::make(Input::get('password'));
+		$user->save();
+
+		return Response::json('Subscriber has been updated successfully',200);
 	}
 
 	public function delete($id)

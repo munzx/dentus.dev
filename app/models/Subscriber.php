@@ -8,7 +8,7 @@ class Subscriber extends Eloquent
 	protected $table = 'subscribers';
 	protected $hidden = ['password'];
 	protected $guarded = ['password'];
-
+	protected $uploadFolder = 'uploads';
 
 	public function saveSubscriber()
 	{
@@ -49,8 +49,15 @@ class Subscriber extends Eloquent
 		$this->email = Input::get('email');
 		$this->gender = Input::get('gender');
 		$this->password = Hash::make(Input::get('password'));
-		$this->img_link = Session::get('fileName');
 		$this->active = 'true';
+
+		if (Input::hasFile('img_link'))
+		{
+			$prefix = date('y').date('m').date('d');
+			$fileNewName = $prefix.Input::get('email').'.'.Input::file('img_link')->getClientOriginalExtension();
+			Input::file('img_link')->move('uploads',$fileNewName);
+			$this->img_link = $fileNewName;
+		}
 
 		$this->save();
 

@@ -21,21 +21,43 @@ class clinics extends \BaseController {
 		$user->source_id = $clinic->id;
 		$user->save();
 
-		return Response::json('New clinic has been added successfully',200);
+		return Response::json($clinic->id,200);
 	}
 
-	public function edit($id)
+	public function update($id)
 	{
 		$clinic = Clinic::find($id);
 		if(!$clinic) return Response::json('Error : Clinic has not been found',404);
-		if($clinic->saveClinic()) return Response::json('New clinic has been added successfully',200);
-		return Response::json('Error : Failed to add new clinic',500);
+
+		if(Input::hasFile('logo_link'))
+		{
+			File::delete($clinic->logo_link);
+		}
+
+		if(Input::hasFile('pic_link'))
+		{
+			File::delete($clinic->pic_link);
+		}
+
+		if(!$clinic->saveClinic()) return Response::json('Error : Failed to add new clinic',500);
+
+		//update clinic data in the users table
+		$user = User::Where('source_id','=',$id)->where('role','=','clinic')->first();
+		$user->email = Input::get('email');
+		$user->password = Hash::make(Input::get('password'));
+		$user->save();
+
+		return Response::json('New clinic has been updated successfully',200);
 	}
 
 	public function delete($id)
 	{
 		$clinic = Clinic::find($id);
 		if(!$clinic) return Response::json('Error : Clinic has not been found',404);
+		//delete clinic logo
+		File::delete('uploads/'.$clinic->logo_link);
+		//delete clinic profile image
+		File::delete('uploads/'.$clinic->pic_link);
 		if($clinic->delete()) return Response::json('Clinic has been deleted successfully',200);
 		return Response::json('Error : Failed to delete clinic',500);
 	}

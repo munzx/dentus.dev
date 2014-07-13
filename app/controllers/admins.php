@@ -21,7 +21,7 @@ class admins extends \BaseController {
 		$user->source_id = $admin->id;
 		$user->save();
 
-		return Response::json('Admin has been added successfully',200);
+		return Response::json($admin->id,200);
 	}
 
 	public function edit($id)
@@ -29,6 +29,13 @@ class admins extends \BaseController {
 		$admin = Admin::find($id);
 		if(!$admin) return Response::json('Error : admin could not be found',404);
 		if(!$admin->saveAdmin()) return Response::json('Error : Could not create new admin',500);
+
+		//update admin data in the users table
+		$user = User::Where('source_id','=',$id)->where('role','=','admin')->first();
+		$user->email = Input::get('email');
+		$user->password = Hash::make(Input::get('password'));
+		$user->save();
+
 		return Response::json('Admin information has been edited successfully',200);	
 	}
 
