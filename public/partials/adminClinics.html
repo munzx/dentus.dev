@@ -17,6 +17,10 @@
 			<p data-ng-show="noData" class="bg-primary">No data has been found!</p>
 			<p data-ng-show="connectError" class="bg-warning">Uknown Error has occured while trying to achieve the operation!<button type="button" ng-click="closeConnectError()" class="close" aria-hidden="true">&times;</button></p>
 
+			<div ng-show="clinicData">
+				<h4><a href=""><span ng-click="backToClinics()" class="glyphicon glyphicon-circle-arrow-left"></span></a>Clinic Data</h4>
+			</div>
+
 			<div ng-show='newClinicForm'  class="bg-info" style="padding:1%;">
 				<button type="button" ng-click="closeNewClincForm()" class="close" aria-hidden="true">&times;</button>
 				<form id="newClinicInfo" method="post" ng-model="newClinicInfo">
@@ -48,7 +52,9 @@
 				<table class="table table-striped table-hover">
 					<thead>
 						<tr>
-							<th><span ng-click="showNewClinicForm()" class="label label-primary">New</span></th>
+							<th>
+								<a href=""><span ng-click="showNewClinicForm()" class="label label-primary">New</span></a>
+							</th>
 							<th>Name</th>
 							<th>Phone</th>
 							<th>Email</th>
@@ -58,8 +64,15 @@
 					</thead>
 					<tbody>
 						<tr data-ng-repeat="clinic in clinics">
-							<td><span ng-click="deleteClinic($index,clinic.id)" class="glyphicon glyphicon-remove-circle"></span> <span ng-click="editClinic($index,clinic.id)" class="glyphicon glyphicon-pencil"></span></td>
-							<td>{{clinic.name}}</td>
+							<td>
+								<a href="">
+									<span ng-click="deleteClinic($index,clinic.id)" class="glyphicon glyphicon-remove-circle"></span>
+								</a>
+								<a href="">
+									<span ng-click="editClinic($index,clinic.id)" class="glyphicon glyphicon-pencil"></span>
+								</a>
+							</td>
+							<td><a href="" ng-click="showClincData(clinic.id)">{{clinic.name}}</a></td>
 							<td>{{clinic.phone_number}}</td>
 							<td>{{clinic.email}}</td>
 							<td>{{clinic.city}}</td>

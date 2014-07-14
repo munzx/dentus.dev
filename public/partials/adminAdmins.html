@@ -42,7 +42,14 @@
 				</thead>
 				<tbody>
 					<tr data-ng-repeat="admin in admins">
-						<td><span ng-click="deleteAdmin($index,admin.id)" class="glyphicon glyphicon-remove-circle"></span> <span ng-click="editAdmin($index,admin.id)" class="glyphicon glyphicon-pencil"></span></td>
+						<td>
+							<a href="">
+								<span ng-click="deleteAdmin($index,admin.id)" class="glyphicon glyphicon-remove-circle"></span>
+							</a>
+							<a href="">
+								<span ng-click="editAdmin($index,admin.id)" class="glyphicon glyphicon-pencil"></span>
+							</a>
+						</td>
 						<td>{{admin.first_name}} {{admin.last_name}}</td>
 						<td>{{admin.email}}</td>
 					</tr>

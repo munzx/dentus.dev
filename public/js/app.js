@@ -157,6 +157,18 @@ dentus.controller('adminSubscribers',function ($http,$scope,$rootScope) {
 		$scope.connectError = false;
 	}
 
+	$scope.showSubscriberHistory = function (id) {
+		$scope.subscribersTable = false;
+		$scope.newSubscriberForm = false;
+		$scope.subscriberHistory = true;
+	}
+
+	$scope.backToSubscribers = function () {
+		$scope.subscribersTable = true;
+		$scope.newSubscriberForm = false;
+		$scope.subscriberHistory = false;		
+	}
+
 	$scope.saveSubscriber = function (id) {
 		if(saveStatus === 'New'){
 			var formData = new FormData($('#newSubscriberForm')[0]);
@@ -348,6 +360,17 @@ dentus.controller('adminClinics',function ($http,$scope,$rootScope) {
 	.error(function (data,error) {
 		$scope.connectError = true;
 	});
+
+	$scope.showClincData = function (id) {
+		$scope.clinicsTable = false;
+		$scope.newClinicForm = false;
+		$scope.clinicData = true;
+	}
+
+	$scope.backToClinics = function () {
+		$scope.clinicsTable = true;
+		$scope.clinicData = false;
+	}
 
 	$scope.closeConnectError = function () {
 		$scope.connectError = false;
