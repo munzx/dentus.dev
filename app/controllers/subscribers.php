@@ -65,7 +65,7 @@ class subscribers extends \BaseController {
 			clinics.name AS clinic_name,clinics.email AS clinic_email,clinics.phone_number AS clinic_phone_number,clinics.city AS clinic_city,clinics.address AS clinic_address,clinics.description AS clinic_description,clinics.logo_link AS clinic_logo_link,clinics.pic_link AS clinic_pic_link,
 			visits.case,visits.treatment,visits.cost,visits.created_at AS visit_date
 			FROM subscribers,clinics,visits 
-			WHERE visits.subscriber_id = subscribers.id AND visits.clinic_id = clinics.id AND subscribers.id = '.Auth::user()->source_id);
+			WHERE visits.subscriber_id = subscribers.id AND visits.clinic_id = clinics.id AND subscribers.id = '.Auth::user()->source_id.' ORDER BY visits.id DESC');
 		if(!$subscriberAllInfo) return Response::json([$subscriber],200);
 		return Response::json($subscriberAllInfo,200);
 	}
@@ -76,7 +76,7 @@ class subscribers extends \BaseController {
 			clinics.name AS clinic_name,clinics.email AS clinic_email,clinics.phone_number AS clinic_phone_number,clinics.city AS clinic_city,clinics.address AS clinic_address,clinics.description AS clinic_description,clinics.logo_link AS clinic_logo_link,clinics.pic_link AS clinic_pic_link,
 			visits.case,visits.treatment,visits.cost,visits.created_at AS visit_date
 			FROM subscribers,clinics,visits 
-			WHERE visits.subscriber_id = subscribers.id AND visits.clinic_id = clinics.id AND subscribers.id = '.$id);
+			WHERE visits.subscriber_id = subscribers.id AND visits.clinic_id = clinics.id AND subscribers.id = '.$id.' ORDER BY visits.id DESC');
 
 		if(!$subscriber) return Response::json('Subscriber has not been found',404);
 		return Response::json($subscriber,200);	
