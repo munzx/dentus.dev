@@ -28,7 +28,8 @@ class visits extends \BaseController
 
 	public function clinics($id)
 	{
-		$result = DB::select('SELECT subscribers.id,subscribers.first_name,subscribers.last_name,subscribers.img_link,subscribers.birthdate,visits.created_at,visits.cost,visits.case,visits.treatment FROM subscribers,visits,clinics where subscribers.active = "true" AND subscribers.id = visits.subscriber_id AND visits.clinic_id = clinics.id AND visits.clinic_id '.$id.' ORDER BY visits.id DESC');
+		$result = DB::select('SELECT subscribers.id,subscribers.first_name,subscribers.last_name,subscribers.img_link,subscribers.birthdate,visits.created_at,visits.cost,visits.case,visits.treatment FROM subscribers,visits,clinics where subscribers.active = "true" AND subscribers.id = visits.subscriber_id AND visits.clinic_id = clinics.id AND visits.clinic_id = '.$id.' ORDER BY visits.id DESC');
+		if(!$result) return Response::json('No data has been found',404);
 		return Response::json($result,200);
 	}
 
