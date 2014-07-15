@@ -18,7 +18,57 @@
 			<p data-ng-show="connectError" class="bg-warning">Uknown Error has occured while trying to achieve the operation!<button type="button" ng-click="closeConnectError()" class="close" aria-hidden="true">&times;</button></p>
 
 			<div ng-show="clinicData">
-				<h4><a href=""><span ng-click="backToClinics()" class="glyphicon glyphicon-circle-arrow-left"></span></a>Clinic Data</h4>
+				<h4><a href=""><span ng-click="backToClinics()" class="glyphicon glyphicon-circle-arrow-left"></span></a>Clinics</h4>
+
+				<!--banner-->
+				<div class="banner">
+					<div class="container">
+						<div class="row">
+							<div class="col-xs-12 col-sm-12 col-md-12 inner-banner">
+								<img src="uploads/{{clinicInfo.pic_link}}" alt="" class="img-responsive">
+								<span style="position:absolute; z-index:100; top:0; right:0px; padding:0;" class="col-xs-6 col-sm-6 col-md-6"><img src="images/inner-logo.png" class="img-responsive"  alt="">
+									<b style="position:absolute; z-index:10; top:36%; right:8%; width:46%;"><img src="uploads/{{clinicInfo.logo_link}}"  alt="" class="img-responsive"></b>
+								</span>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<img src="images/banner-shadow.png"  class="img-responsive" alt="" style="display:block; margin:0 auto;">
+
+				<div class="row">
+					<div class="table-responsive panel">
+						<p data-ng-show="noVisitsData" class="bg-primary">No data has been found!</p>
+					</div>
+				</div>
+
+				<div class="row" ng-show="showClinicVisits">
+					<div class="table-responsive panel">
+
+						<table class="table table-bordered table-hover">
+							<tr>
+								<thead>
+									<th>Full Name</th>
+									<th>Birth Date</th>
+									<th>Case</th>
+									<th>Treatment</th>
+									<th>Cost</th>
+									<th>Date &amp; time</th>
+								</thead>
+							</tr>
+							<tr ng-repeat="visit in clinicVisitsInfo">
+								<td align="left" valign="middle">{{visit.first_name}} {{visit.last_name}}</td>
+								<td align="left" valign="middle">{{visit.birthdate}}</td>
+								<td align="left" valign="middle">{{visit.case}}</td>
+								<td align="left" valign="middle">{{visit.treatment}}</td>
+								<td align="left" valign="middle">{{visit.cost}}</td>
+								<td align="left" valign="middle">{{visit.created_at}}</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+
+
 			</div>
 
 			<div ng-show='newClinicForm'  class="bg-info" style="padding:1%;">
@@ -72,7 +122,7 @@
 									<span ng-click="editClinic($index,clinic.id)" class="glyphicon glyphicon-pencil"></span>
 								</a>
 							</td>
-							<td><a href="" ng-click="showClincData(clinic.id)">{{clinic.name}}</a></td>
+							<td><a href="" ng-click="showClincData($index,clinic.id)">{{clinic.name}}</a></td>
 							<td>{{clinic.phone_number}}</td>
 							<td>{{clinic.email}}</td>
 							<td>{{clinic.city}}</td>

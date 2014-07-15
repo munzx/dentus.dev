@@ -379,15 +379,29 @@ dentus.controller('adminClinics',function ($http,$scope,$rootScope) {
 		$scope.connectError = true;
 	});
 
-	$scope.showClincData = function (id) {
+	$scope.showClincData = function (index,id) {
 		$scope.clinicsTable = false;
 		$scope.newClinicForm = false;
 		$scope.clinicData = true;
+		$scope.clinicInfo = $scope.clinics[index];
+
+
+		$http.get('clinics/'+id+'/visits')
+		.success(function (data,success) {
+			$scope.clinicVisitsInfo = data;
+			$scope.showClinicVisits = true;
+			$scope.noVisitsData = false;
+		})
+		.error(function (data,error) {
+			$scope.showClinicVisits = false;
+			$scope.noVisitsData = true;
+		});
 	}
 
 	$scope.backToClinics = function () {
 		$scope.clinicsTable = true;
 		$scope.clinicData = false;
+		$scope.noVisitsData = false;
 	}
 
 	$scope.closeConnectError = function () {
