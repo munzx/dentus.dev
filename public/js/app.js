@@ -157,10 +157,28 @@ dentus.controller('adminSubscribers',function ($http,$scope,$rootScope) {
 		$scope.connectError = false;
 	}
 
-	$scope.showSubscriberHistory = function (id) {
-		$scope.subscribersTable = false;
-		$scope.newSubscriberForm = false;
-		$scope.subscriberHistory = true;
+	$scope.showSubscriberHistory = function (index,id) {
+		$http.get('subscribers/'+id)
+		.success(function (data,success) {
+			$scope.subscribersAllInfo = data;
+			$scope.visitData = true;
+			$scope.noVisitDataFound = false;
+			$scope.subscribersTable = false;
+			$scope.newSubscriberForm = false;
+			$scope.subscriberHistory = true;
+		})
+		.error(function (data,error) {
+			if(error == 404){
+				$scope.subscribersAllInfo = [$scope.subscribers[index]];
+				$scope.noVisitDataFound = true;
+				$scope.visitData = false;
+				$scope.subscribersTable = false;
+				$scope.newSubscriberForm = false;
+				$scope.subscriberHistory = true;
+			} else {
+				$scope.connectError = true;
+			}
+		});
 	}
 
 	$scope.backToSubscribers = function () {
