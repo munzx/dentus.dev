@@ -70,16 +70,31 @@ dentus.controller('login',function  ($scope,$http,$location,$rootScope) {
 
 	$http.get('check')
 	.success(function (data,success) {
-		if(data == 'true'){
-			$scope.accessDenied = false;
-			$scope.logIn = false;
-			$scope.logOut = true;
-		} else {
-			$scope.accessDenied = false;
-			$scope.logIn = true;
-			$scope.logOut = false;
+		$scope.accessDenied = false;
+		$scope.logIn = false;
+		$scope.logOut = true;
+
+		switch(data)
+		{
+			case '"admin"':
+			$location.path('/admin');
+			$rootScope.home = '/admin';
+			break;
+			case '"subscriber"':
+			$location.path('/subscribers');
+			$rootScope.home = '/subscribers';
+			break;
+			case '"clinic"': 
+			$location.path('/clinics');
+			$rootScope.home = '/clinics';
+			break;
 		}
 	})
+	.error(function (data,error) {
+		$scope.accessDenied = false;
+		$scope.logIn = true;
+		$scope.logOut = false;
+	});
 
 	$scope.doLogIn = function () {
 		$http.post('login',$scope.logInfo)

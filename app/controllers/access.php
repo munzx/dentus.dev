@@ -4,7 +4,8 @@ class access extends \BaseController {
 
 	public function check()
 	{
-		return Response::json(Auth::check(),200);
+		if(Auth::check()) return Response::json(Auth::user()->role,200);
+		return Response::json(false,403);
 	}
 
 	public function login()
