@@ -19,12 +19,10 @@ class Subscriber extends Eloquent
 			'birthdate'=>'required',
 			'mobile_number'=>'required',
 			'city'=>'required',
+			'email'=>'required',
 			'address'=>'required',
 			'work_status'=>'required',
 			'marital_status'=>'required',
-			'childern'=>'required',
-			'company_name'=>'alpha_num',
-			'company_city'=>'alpha_num',
 			'gender'=>'required'
 			);
 

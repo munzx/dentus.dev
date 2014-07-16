@@ -238,6 +238,7 @@ dentus.controller('adminSubscribers',function ($http,$scope,$rootScope) {
 					$scope.$apply(function() {
 						$scope.newSubscriberForm = false;
 						$scope.newSubscriberInfo = {};
+						console.log(data);
 					});
 				},
 				error : function (XMLHttpRequest, textStatus, errorThrown) {
