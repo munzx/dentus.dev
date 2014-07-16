@@ -33,7 +33,7 @@ class admins extends \BaseController {
 		//update admin data in the users table
 		$user = User::Where('source_id','=',$id)->where('role','=','admin')->first();
 		$user->email = Input::get('email');
-		$user->password = Hash::make(Input::get('password'));
+		if(Input::get('password')) $user->password = Hash::make(Input::get('password'));
 		$user->save();
 
 		return Response::json('Admin information has been edited successfully',200);	

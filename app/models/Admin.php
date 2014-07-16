@@ -25,7 +25,7 @@ class Admin extends Eloquent
 		$this->first_name = Input::get('first_name');
 		$this->last_name = Input::get('last_name');
 		$this->email = Input::get('email');
-		$this->password = Hash::make(Input::get('password'));
+		if(Input::get('password')) $this->password = Hash::make(Input::get('password'));
 
 		$this->save();
 

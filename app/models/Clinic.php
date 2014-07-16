@@ -30,7 +30,7 @@ class Clinic extends Eloquent
 		$this->city = Input::get('city');
 		$this->address = Input::get('address');
 		$this->description = Input::get('description');
-		$this->password = Hash::make(Input::get('password'));
+		if(Input::get('password')) $this->password = Hash::make(Input::get('password'));
 
 		if(Input::hasFile('logo_link'))
 		{

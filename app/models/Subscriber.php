@@ -46,7 +46,7 @@ class Subscriber extends Eloquent
 		$this->company_phone = Input::get('company_phone');
 		$this->email = Input::get('email');
 		$this->gender = Input::get('gender');
-		$this->password = Hash::make(Input::get('password'));
+		if(Input::get('password')) $this->password = Hash::make(Input::get('password'));
 		$this->active = 'true';
 
 		if (Input::hasFile('img_link'))

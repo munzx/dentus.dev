@@ -43,7 +43,7 @@ class subscribers extends \BaseController {
 		//update subscriber data in the users table
 		$user = User::Where('source_id','=',$id)->where('role','=','subscriber')->first();
 		$user->email = Input::get('email');
-		$user->password = Hash::make(Input::get('password'));
+		if(Input::get('password')) $user->password = Hash::make(Input::get('password'));
 		$user->save();
 
 		return Response::json('Subscriber has been updated successfully',200);
