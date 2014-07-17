@@ -48,6 +48,26 @@ Route::filter('auth', function()
 	}
 });
 
+//admin filter
+Route::filter('admin',function()
+{
+	if(Auth::guest()) return false;
+	if(Auth::user()->role != 'admin') return false;
+});
+
+Route::filter('clinic',function()
+{
+	if(Auth::guest()) return false;
+	if(Auth::user()->role != 'admin' && Auth::user()->role != 'clinic') return false;
+});
+
+Route::filter('subscriber',function()
+{
+	if(Auth::guest()) return false;
+	if(Auth::user()->role != 'admin' && Auth::user()->role != 'subscriber') return false;
+});
+
+
 
 Route::filter('auth.basic', function()
 {
