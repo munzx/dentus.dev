@@ -13,6 +13,9 @@ html {
      overflow: scroll;
 }
 
+.faq li {
+  text-decoration: none;
+}
 
 #wrap {
   min-height: 100%;

@@ -650,8 +650,8 @@ dentus.controller('clinics',function ($scope,$http) {
 
 });
 
-dentus.controller('cms',function () {
-	
+dentus.controller('cms',function ($scope,$location) {
+
 });
 
 dentus.controller('subscribers',function ($http,$scope) {
