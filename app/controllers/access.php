@@ -15,8 +15,6 @@ class access extends \BaseController {
 		$field = filter_var($usernameinput, FILTER_VALIDATE_EMAIL) ? 'email' : 'serial_number';
 
 		if(Auth::attempt(array($field => $usernameinput, 'password' => $password), true)) return Response::json(Auth::user()->role,200);
-
-		//if(Auth::attempt(['email'=>Input::get('email'),'password'=>Input::get('password')])) 
 		return Response::json('Error : Access denied',403);
 	}
 
