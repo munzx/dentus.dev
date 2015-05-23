@@ -11,8 +11,6 @@ class subscribers extends \BaseController {
 	{
 		$subscriber = New Subscriber;
 		if(!$subscriber->saveSubscriber()) return Response::json('Error adding new subscriber',500);
-
-		//$subscriber->serial_number = date('y').date('m').date('d').$subscriber->id;
 		$subscriber->save();
 
 		$user = new User;
@@ -20,7 +18,6 @@ class subscribers extends \BaseController {
 		$user->last_name = $subscriber->last_name;
 		$user->email = $subscriber->email;
 		$user->password = $subscriber->password;
-		//$user->serial_number = $subscriber->serial_number;
 		$user->role = 'subscriber';
 		$user->source_id = $subscriber->id;
 		$user->serial_number = $subscriber->serial_number;
