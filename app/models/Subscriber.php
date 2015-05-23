@@ -22,6 +22,7 @@ class Subscriber extends Eloquent
 			'email'=>'required',
 			'address'=>'required',
 			'work_status'=>'required',
+			'serial_number'=>'required',
 			'marital_status'=>'required',
 			'gender'=>'required'
 			);
@@ -46,6 +47,7 @@ class Subscriber extends Eloquent
 		$this->company_phone = Input::get('company_phone');
 		$this->email = Input::get('email');
 		$this->gender = Input::get('gender');
+		$this->serial_number = Input::get('serial_number');
 		if(Input::get('password')) $this->password = Hash::make(Input::get('password'));
 		$this->active = 'true';
 

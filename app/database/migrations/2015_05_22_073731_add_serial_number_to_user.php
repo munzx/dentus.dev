@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddRemmemberTokenToUsers extends Migration {
+class AddSerialNumberToUser extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -14,7 +14,7 @@ class AddRemmemberTokenToUsers extends Migration {
 	{
 		Schema::table('users',function(Blueprint $table)
 		{
-			$table->string('remember_token',100)->nullable();
+			$table->string('serial_number',100)->nullable();
 		});
 	}
 
@@ -27,7 +27,7 @@ class AddRemmemberTokenToUsers extends Migration {
 	{
 		Schema::table('users',function(Blueprint $table)
 		{
-			$table->dropColumn('remember_token');
+			$table->dropColumn('serial_number');
 		});
 	}
 

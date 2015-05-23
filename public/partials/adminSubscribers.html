@@ -31,7 +31,7 @@
 								<table class="table" style="width:100%;">
 									<tr>
 										<td rowspan="2">
-										<img style="width:300px;" src="uploads/{{subscribersAllInfo[0].img_link}}" alt="" class="img-responsive img-thumbnail img-circle pull-left">
+										<img style="width:300px;" ng-src="uploads/{{subscribersAllInfo[0].img_link}}" alt="" class="img-responsive img-thumbnail img-circle pull-left">
 										</td>
 									</tr>
 									<tr>
@@ -134,6 +134,7 @@
 						<select class="btn btn-primary" name="company_city" ng-model="newSubscriberInfo.company_city">
 							<option ng-repeat="option in cityOptions" value="{{option}}">{{option}}</option>
 						</select>
+						<input class="search" type="text" name="serial_number" ng-model="newSubscriberInfo.serial_number" placeholder="Serial Number">
 						<input class="search" type="number" name="company_phone" ng-model="newSubscriberInfo.company_phone" placeholder="Company Phone">
 						<input class="search" type="file" name="img_link" ng-model="newSubscriberInfo.img_link">
 						<button ng-click="saveSubscriber(newSubscriberInfo.id)" class="btn btn-primary btn-lg">Save</button>

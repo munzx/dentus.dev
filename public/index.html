@@ -53,8 +53,8 @@
 							<div  ng-controller='login' >
 								<form data-ng-model="logInfo" data-ng-show="logIn" class="navbar-form navbar-left" role="login">
 									<div class="form-group">
-										<p data-ng-show="accessDenied" class="bg-warning">Wrong Email/Password combination!</p>
-										<input type="email" ng-model="logInfo.email" class="form-control search" placeholder="Email">
+										<p data-ng-show="accessDenied" class="bg-warning">Access Denied!</p>
+										<input ng-model="logInfo.accessid" class="form-control search" placeholder="Access ID / Email">
 										<input type="password" ng-model="logInfo.password" class="form-control search" placeholder="Password">
 									</div>
 									<button data-ng-click="doLogIn()" class="btn btn-link">SignIn</button>

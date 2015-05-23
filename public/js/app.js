@@ -558,8 +558,6 @@ dentus.controller('clinics',function ($scope,$http) {
 	$scope.subscriberHistory = false;
 	$scope.serialNumberForm = true;
 
-
-
 	$http.get('clinics/myvisits')
 	.success(function (data,success) {
 		if(data.length == 0){
@@ -629,10 +627,22 @@ dentus.controller('clinics',function ($scope,$http) {
 			subscriberInfo.birthdate = $scope.searchResult[0].birthdate;
 			subscriberInfo.id = data['id'];
 			subscriberInfo.case = data['case'];
+			subscriberInfo.cost = data['cost'];
 			subscriberInfo.treatment = data['treatment'];
 			subscriberInfo.created_at = data['created_at'];
 
-			$scope.visits.unshift(subscriberInfo);
+			subscriberInfo.clinic_logo = $scope.visits[0].clinic_logo;
+			subscriberInfo.clinic_pic = $scope.visits[0].clinic_pic;
+
+			if($scope.visits.length == 0){
+				$scope.visits = [];
+				$scope.visits.unshift(subscriberInfo);
+			} else {
+				$scope.visits.unshift(subscriberInfo);
+			}
+
+			//show the default image
+			$scope.showImage = imageSource.default;
 		})
 		.error(function (data,error) {
 			$scope.connectError = true;

@@ -25,16 +25,16 @@
 					<div class="container">
 						<div class="row">
 							<div class="col-xs-12 col-sm-12 col-md-12 inner-banner">
-								<img src="uploads/{{clinicInfo.pic_link}}" alt="" class="img-responsive">
-								<span style="position:absolute; z-index:100; top:0; right:0px; padding:0;" class="col-xs-6 col-sm-6 col-md-6"><img src="images/inner-logo.png" class="img-responsive"  alt="">
-									<b style="position:absolute; z-index:10; top:36%; right:8%; width:46%;"><img src="uploads/{{clinicInfo.logo_link}}"  alt="" class="img-responsive"></b>
+								<img ng-src="uploads/{{clinicInfo.pic_link}}" alt="" class="fillImage img-responsive">
+								<span style="position:absolute; z-index:100; top:0; right:0px; padding:0;" class="col-xs-6 col-sm-6 col-md-6"><img ng-src="images/inner-logo.png" class="img-responsive"  alt="">
+									<b style="position:absolute; z-index:10; top:36%; right:8%; width:46%;"><img ng-src="uploads/{{clinicInfo.logo_link}}"  alt="" class="img-responsive"></b>
 								</span>
 
 							</div>
 						</div>
 					</div>
 				</div>
-				<img src="images/banner-shadow.png"  class="img-responsive" alt="" style="display:block; margin:0 auto;">
+				<img ng-src="images/banner-shadow.png"  class="img-responsive" alt="" style="display:block; margin:0 auto;">
 
 				<div class="row">
 					<div class="table-responsive panel">
@@ -97,6 +97,8 @@
 					
 				</form>
 			</div>
+
+			<a href=""><span data-ng-hide="clinicsTable" ng-click="showNewClinicForm()" class="label label-primary">New</span></a>
 
 			<div data-ng-show="clinicsTable"  class="table-responsive">
 				<table class="table table-striped table-hover">

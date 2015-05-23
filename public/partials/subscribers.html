@@ -3,11 +3,11 @@
 	<div class="banner">
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12"><img src="images/clnic-banner.jpg"  alt="" class="img-responsive"></div>
+				<div class="col-xs-12 col-sm-12 col-md-12"><img ng-src="images/clnic-banner.jpg"  alt="" class="img-responsive"></div>
 			</div>
 		</div>
 	</div>
-	<img src="images/banner-shadow.png"  class="img-responsive" alt="" style="display:block; margin:0 auto;">
+	<img ng-src="images/banner-shadow.png"  class="img-responsive" alt="" style="display:block; margin:0 auto;">
 	<!--end-banner-->
 
 	<!--body-layout-->
@@ -19,14 +19,20 @@
 			<div class="container">
 				<div class="row patiant-wraper">
 					<div class="col-xs-12 col-sm-12 col-md-12 patiant">
-						<div class="col-xs-4 col-sm-3 col-md-2 col-xs-pull-4 col-sm-pull-5 col-md-pull-5 chakti"><img src="images/chakti.png"></div>
+						<button type="button" class="btn btn-default navbar-btn">
+							<span class="glyphicon glyphicon-user" aria-hidden="true"></span> Account
+						</button>
+						<button type="button" class="btn btn-default navbar-btn">
+							<span class="glyphicon glyphicon-home" aria-hidden="true"></span> Clinics
+						</button>
+						<div class="col-xs-4 col-sm-3 col-md-2 col-xs-pull-4 col-sm-pull-5 col-md-pull-5 chakti"><img ng-src="images/chakti.png"></div>
 						<div class="clearfix"></div>
 						<p data-ng-show="connectError" class="bg-warning">Uknown Error has occured while trying to achieve the operation!<button type="button" ng-click="closeConnectError()" class="close" aria-hidden="true">&times;</button></p>
 						<h1><span>Dentus - User Identity Card</span></h1>
 						<div class="row" style="margin-top:20px;">
 							<div class="col-xs-12 col-sm-7 col-md-7 text-left patiend-details">
 								<div class="media">
-									<img src="uploads/{{subscriberPageInfo[0].img_link}}" alt="" class="img-responsive img-thumbnail img-circle pull-left">
+									<img ng-src="uploads/{{subscriberPageInfo[0].img_link}}" alt="" class="img-responsive img-thumbnail img-circle pull-left">
 									<article class="media-body text-left" style="padding:56px 0 0 10px;">
 										<h5><strong>Name:</strong> {{subscriberPageInfo[0].first_name}} {{subscriberPageInfo[0].last_name}}</h5>
 										<h5><strong>Email:</strong> <a href="mailto:fares.younis@yahoo.com">{{subscriberPageInfo[0].email}}</a></h5>
@@ -46,7 +52,7 @@
 										</tr>
 										<tr ng-show="vistsDetails" class="she" ng-repeat='info in subscriberPageInfo'>
 											<td align="left" valign="middle">
-												<span ng-click="showVisitDetail($index)" class="glyphicon glyphicon-plus"></span>{{info.case}}
+												<a href="" ng-click="showVisitDetail($index)"><span class="glyphicon glyphicon-plus"></span>{{info.case}}</a>
 											</td>
 											<td align="left" valign="middle">{{info.cost}}</td>
 											<td align="left" valign="middle">{{info.visit_date}}</td>
@@ -68,7 +74,7 @@
 									</tr>
 									<tr class="she">
 										<td align="left" valign="middle">
-											<span ng-click="closeVisitDetail()" class="glyphicon glyphicon-minus"></span>{{visitInfo.case}}
+											<a href="" ng-click="closeVisitDetail()"><span class="glyphicon glyphicon-minus"></span>{{visitInfo.case}}</a>
 										</td>
 										<td align="left" valign="middle">{{visitInfo.cost}}</td>
 										<td align="left" valign="middle">{{visitInfo.visit_date}}</td>

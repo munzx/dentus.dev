@@ -42,3 +42,15 @@ html {
 .element {
   .center-block();
 }
+
+.fillImage {
+    width: 100%;
+    margin-bottom: 10%;
+    height: 100%;
+    background-color: #cccccc;
+
+}​
+
+.pointer {
+  cursor: pointer;
+}

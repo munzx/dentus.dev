@@ -15,7 +15,7 @@ class UsersTableSeeder extends Seeder {
 				'email'=>'ahmed.osman@dentus.me',
 				'password'=>Hash::make('Dentus@123'),
 				'role'=>'admin',
-				'user_id'=>'1'
+				'source_id'=>'1'
 			],
 			[
 				'first_name'=>'Fares',
@@ -23,7 +23,7 @@ class UsersTableSeeder extends Seeder {
 				'email'=>'fares.a.younis@dentus.me',
 				'password'=>Hash::make('Dentus@123'),
 				'role'=>'admin',
-				'user_id'=>'2'
+				'source_id'=>'2'
 			]
 		);
 
